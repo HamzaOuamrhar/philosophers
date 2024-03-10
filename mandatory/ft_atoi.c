@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:26 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/10 12:22:41 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/10 12:32:14 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_atoi(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res = (res * 10) + (str[i] - '0');
-		if (res > 2147483647)
+		if (res > 1000000)
 			return (0);
 		i++;
 	}
