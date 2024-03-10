@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/09 23:15:28 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/10 17:14:57 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 # define PHILO_H
 
 # include <stdio.h>
+# include <pthread.h>
 
 typedef struct t_philo
 {
+	pthread_t th[200];
+	pthread_mutex_t	mutex;
 	int	n_filo;
 	int	n_forks;
 	int	t_die;

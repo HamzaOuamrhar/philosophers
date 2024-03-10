@@ -6,11 +6,11 @@
 #    By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/09 23:13:14 by houamrha          #+#    #+#              #
-#    Updated: 2024/03/09 23:13:33 by houamrha         ###   ########.fr        #
+#    Updated: 2024/03/10 15:05:52 by houamrha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc  -Wall -Wextra -Werror
+CC = cc  -Wall -Wextra -Werror -fsanitize=address
 SRC = ./mandatory/philo.c ./mandatory/utils.c ./mandatory/ft_atoi.c
 OBJ = $(SRC:.c=.o)
 NAME = philo
