@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/10 17:16:15 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:07:27 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,29 @@ int	parse(int argc, char **argv, t_philo *philo)
 	return (1);
 }
 
-void	eating(t_philo *philo)
+void	eating(t_philo_data *philo_data)
 {
-	(void)philo;
-	printf("eating...!\n");
+	printf("%d\n", philo_data->index);
 }
 
 void	*thread_handler(void *p)
 {
-	t_philo *philo = (t_philo *)p;
-	eating(philo);
+	t_philo_data *philo_data = (t_philo_data *)p;
+	eating(philo_data);
 	return (NULL);
 }
 
 int	create_threads(t_philo *philo)
 {
+	t_philo_data	philo_data[200];
 	int	i;
 
 	i = 0;
 	while (i < philo->n_filo)
 	{
-		if (pthread_create(&(philo->th[i]), NULL, &thread_handler, philo) != 0)
+		philo_data[i].philo = philo;
+		philo_data[i].index = i;
+		if (pthread_create(&(philo->th[i]), NULL, &thread_handler, &(philo_data[i])) != 0)
 			return (0);
 		i++;
 	}
