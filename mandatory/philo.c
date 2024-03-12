@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/12 14:07:27 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:27:07 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	*thread_handler(void *p)
 
 int	create_threads(t_philo *philo)
 {
-	t_philo_data	philo_data[200];
+	t_philo_data	philo_data[philo->n_filo];
 	int	i;
 
 	i = 0;
