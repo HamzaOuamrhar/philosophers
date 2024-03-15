@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/15 14:39:14 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:50:09 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,10 @@ void	*thread_handler(void *p)
 	return (NULL);
 }
 
-int	init(t_data *data)
+int	init_philos(t_data *data)
 {
 	int	i;
 
-	i = 0;
-	while (i < data->n_forks)
-	{
-		data->forks[i].id = i;
-		if (pthread_mutex_init(&(data->forks[i].fork), NULL) != 0)
-			return (0);
-		i++;
-	}
 	i = 0;
 	while (i < data->n_filo)
 	{
@@ -68,6 +60,23 @@ int	init(t_data *data)
 			return (0);
 		i++;
 	}
+	return (1);
+}
+
+int	init(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->n_forks)
+	{
+		data->forks[i].id = i;
+		if (pthread_mutex_init(&(data->forks[i].fork), NULL) != 0)
+			return (0);
+		i++;
+	}
+	if (!init_philos(data))
+		return (0);
 	return (1);
 }
 
