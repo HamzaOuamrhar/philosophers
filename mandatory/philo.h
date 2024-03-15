@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/15 13:48:17 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:13:20 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef struct t_philo
 {
 	pthread_t	philo;
 	int			id;
+	t_fork		*left_fork;
+	t_fork		*right_fork;
 }	t_philo;
 
 typedef struct t_fork
