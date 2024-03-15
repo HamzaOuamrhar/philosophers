@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/15 15:55:53 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:44:08 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int	main(int argc, char **argv)
 	t_data	*data;
 
 	data = malloc(sizeof(t_data));
+	if (!data)
+		return (1);
 	if (argc < 5 || argc > 6)
 	{
 		printf("Number of arguments not valide!\n");
