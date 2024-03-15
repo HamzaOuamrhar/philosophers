@@ -6,64 +6,57 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/12 14:27:07 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:08:10 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	parse(int argc, char **argv, t_philo *philo)
+int	parse(int argc, char **argv, t_data *data)
 {
 	if (!are_valide_args(argc, argv))
 		return (0);
-	philo->n_filo = ft_atoi(argv[1]);
-	philo->n_forks = philo->n_filo;
-	philo->t_die = ft_atoi(argv[2]);
-	philo->t_eat = ft_atoi(argv[3]);
-	philo->t_sleep = ft_atoi(argv[4]);
+	data->n_filo = ft_atoi(argv[1]);
+	data->n_forks = data->n_filo;
+	data->t_die = ft_atoi(argv[2]);
+	data->t_eat = ft_atoi(argv[3]);
+	data->t_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 	{
-		philo->n_must_eat = ft_atoi(argv[5]);
-		if (!philo->n_must_eat)
+		data->n_must_eat = ft_atoi(argv[5]);
+		if (!data->n_must_eat)
 			return (0);
 	}
-	if (!philo->n_filo || philo->n_filo > 200 || philo->t_die < 60
-		|| philo->t_eat < 60
-		|| philo->t_sleep < 60)
+	if (!data->n_filo || data->n_filo > 200 || data->t_die < 60
+		|| data->t_eat < 60
+		|| data->t_sleep < 60)
 		return (0);
 	return (1);
 }
 
-void	eating(t_philo_data *philo_data)
-{
-	printf("%d\n", philo_data->index);
-}
-
 void	*thread_handler(void *p)
 {
-	t_philo_data *philo_data = (t_philo_data *)p;
-	eating(philo_data);
+	t_philo *philo = (t_philo *)p;
+	printf("%d\n", philo->id);
 	return (NULL);
 }
 
-int	create_threads(t_philo *philo)
+int	init(t_data *data)
 {
-	t_philo_data	philo_data[philo->n_filo];
 	int	i;
 
 	i = 0;
-	while (i < philo->n_filo)
+	while (i < data->n_filo)
 	{
-		philo_data[i].philo = philo;
-		philo_data[i].index = i;
-		if (pthread_create(&(philo->th[i]), NULL, &thread_handler, &(philo_data[i])) != 0)
+		data->philos[i].id = i;
+		if (pthread_create(&(data->philos[i].philo), NULL, &thread_handler, &(data->philos[i])) != 0)
 			return (0);
 		i++;
 	}
 	i = 0;
-	while (i < philo->n_filo)
+	while (i < data->n_filo)
 	{
-		if (pthread_join(philo->th[i], NULL) != 0)
+		if (pthread_join(data->philos[i].philo, NULL) != 0)
 			return (0);
 		i++;
 	}
@@ -72,20 +65,20 @@ int	create_threads(t_philo *philo)
 
 int	main(int argc, char **argv)
 {
-	t_philo			philo;
+	t_data	*data;
 
-	pthread_mutex_init(&(philo.mutex), NULL);
+	data = malloc(sizeof(t_data));
 	if (argc < 5 || argc > 6)
 	{
 		printf("Number of arguments not valide!\n");
 		return (1);
 	}
-	if (!parse(argc, argv, &philo))
+	if (!parse(argc, argv, data))
 	{
 		printf("Some arguments arn't valide!\n");
 		return (1);
 	}
-	if (!create_threads(&philo))
+	if (!init(data))
 	{
 		printf("Thread error!\n");
 		return (1);
