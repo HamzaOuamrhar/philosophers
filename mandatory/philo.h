@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/15 15:13:20 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:46:08 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 # include <pthread.h>
 # include <stdlib.h>
 
+typedef struct t_fork
+{
+	pthread_mutex_t	fork;
+	int				id;
+}	t_fork;
+
 typedef struct t_philo
 {
 	pthread_t	philo;
@@ -25,11 +31,6 @@ typedef struct t_philo
 	t_fork		*right_fork;
 }	t_philo;
 
-typedef struct t_fork
-{
-	pthread_mutex_t	fork;
-	int				id;
-}	t_fork;
 
 typedef struct t_data
 {
