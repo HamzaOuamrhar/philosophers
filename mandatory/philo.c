@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/15 14:08:10 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:39:14 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,14 @@ int	init(t_data *data)
 {
 	int	i;
 
+	i = 0;
+	while (i < data->n_forks)
+	{
+		data->forks[i].id = i;
+		if (pthread_mutex_init(&(data->forks[i].fork), NULL) != 0)
+			return (0);
+		i++;
+	}
 	i = 0;
 	while (i < data->n_filo)
 	{
