@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/15 21:36:13 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/15 22:53:13 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <pthread.h>
 # include <stdlib.h>
 # include <sys/time.h>
+# include <unistd.h>
 
 typedef struct t_fork
 {
@@ -47,5 +48,6 @@ typedef struct t_data
 
 int	ft_atoi(const char *str);
 int	are_valide_args(int argc, char **argv);
+long	get_time();
 
 #endif
