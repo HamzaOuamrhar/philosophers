@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/15 14:50:09 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:00:52 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	init_philos(t_data *data)
 	i = 0;
 	while (i < data->n_filo)
 	{
-		data->philos[i].id = i;
+		data->philos[i].id = i + 1;
 		if (pthread_create(&(data->philos[i].philo), NULL, &thread_handler, &(data->philos[i])) != 0)
 			return (0);
 		i++;
