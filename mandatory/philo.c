@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/15 15:21:14 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:55:53 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ int	init_philos(t_data *data)
 		data->philos[i].id = i + 1;
 		if ((i + 1) % 2 == 0)
 		{
-			data->philos[i].left_fork->fork = data->forks[i].fork;
-			data->philos[i].right_fork->fork = data->forks[(i + 1) % data->n_filo].fork;
+			data->philos[i].left_fork = &(data->forks[i]);
+			data->philos[i].right_fork = &(data->forks[(i + 1) % data->n_filo]);
 		}
 		else
 		{
-			data->philos[i].left_fork->fork = data->forks[(i + 1) % data->n_filo].fork;
-			data->philos[i].right_fork->fork = data->forks[i].fork;
+			data->philos[i].left_fork = &(data->forks[(i + 1) % data->n_filo]);
+			data->philos[i].right_fork = &(data->forks[i]);
 		}
 		if (pthread_create(&(data->philos[i].philo), NULL, &thread_handler, &(data->philos[i])) != 0)
 			return (0);
