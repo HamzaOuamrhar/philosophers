@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/16 14:10:29 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/16 14:18:05 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,22 +111,19 @@ int	init(t_data *data)
 
 int	main(int argc, char **argv)
 {
-	t_data	*data;
+	t_data	data;
 
 	if (argc < 5 || argc > 6)
 	{
 		printf("Number of arguments not valide!\n");
 		return (1);
 	}
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (1);
-	if (!parse(argc, argv, data))
+	if (!parse(argc, argv, &data))
 	{
 		printf("Some arguments arn't valide!\n");
 		return (1);
 	}
-	if (!init(data))
+	if (!init(&data))
 	{
 		printf("Thread error!\n");
 		return (1);
