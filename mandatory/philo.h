@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/16 02:10:16 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/16 02:17:29 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ struct s_philo
 	int			id;
 	t_fork		*left_fork;
 	t_fork		*right_fork;
-	t_data		*data;
 };
 
 struct s_data
@@ -48,8 +47,6 @@ struct s_data
 	int	t_eat;
 	int	t_sleep;
 	int	n_must_eat;
-	int	end;
-	int	ready;
 };
 
 
