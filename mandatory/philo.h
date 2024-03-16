@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/16 02:24:03 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/16 14:19:19 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdio.h>
 # include <pthread.h>
-# include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
 
