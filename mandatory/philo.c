@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/16 02:23:22 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/16 02:27:49 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int	parse(int argc, char **argv, t_data *data)
 void	*thread_handler(void *p)
 {
 	t_philo *philo = (t_philo *)p;
-	while(1);
+	while (!philo->data->ready)
+	;
 	printf("%d\n", philo->id);
 	return (NULL);
 }
@@ -73,6 +74,7 @@ int	init_data(t_data *data)
 	i = 0;
 	while (i < data->n_filo)
 	{
+		data->philos[i].data = data;
 		if ((i + 1) % 2 == 0)
 		{
 			data->philos[i].left_fork = &(data->forks[i]);
