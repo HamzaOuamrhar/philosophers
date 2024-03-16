@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/16 15:20:12 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/16 16:32:25 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ struct s_philo
 	t_fork		*left_fork;
 	t_fork		*right_fork;
 	t_data		*data;
+	int			meals_eaten;
+	long		last_meal_time;
+	int			full;
+	pthread_mutex_t	philo_lock;
 };
 
 struct s_data

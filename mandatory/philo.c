@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/16 15:21:12 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/16 16:38:06 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,33 @@ int	parse(int argc, char **argv, t_data *data)
 	return (1);
 }
 
+void	eating(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->right_fork->fork);
+	write_logs("taken", philo->data);
+	pthread_mutex_lock(&philo->left_fork->fork);
+	write_logs("taken", philo->data);
+
+
+	pthread_mutex_lock(&philo->philo_lock);
+	philo->meals_eaten += 1;
+	philo->last_meal_time = get_time();
+	write_logs("eating", philo->data);
+	precise_usleep(philo->data->t_eat);
+	if (philo->meals_eaten == philo->data->n_must_eat)
+		philo->full = 1;
+	pthread_mutex_unlock(&philo->philo_lock);
+
+	pthread_mutex_unlock(&philo->right_fork->fork);
+	pthread_mutex_unlock(&philo->left_fork->fork);
+}
+
 void	*thread_handler(void *p)
 {
 	t_philo *philo = (t_philo *)p;
 	while (!philo->data->ready)
 	;
-	printf("%d\n", philo->id);
+	eating(philo);
 	return (NULL);
 }
 
@@ -47,6 +68,8 @@ int	init_philos(t_data *data)
 {
 	int	i;
 
+	pthread_mutex_init(&data->philos->philo_lock, NULL);
+	data->philos->full = 0;
 	i = 0;
 	while (i < data->n_filo)
 	{
