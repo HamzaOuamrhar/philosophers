@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/16 14:21:51 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/16 15:20:12 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ struct s_data
 	int	n_must_eat;
 	int	ready;
 	int	end;
+	long	start;
 };
 
 
@@ -56,5 +57,7 @@ int	ft_atoi(const char *str);
 int	are_valide_args(int argc, char **argv);
 long	get_time();
 void	precise_usleep(long mls);
+int	ft_strcmp(char *s1, char *s2);
+void	write_logs(char *s, t_data *data);
 
 #endif

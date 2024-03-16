@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/16 14:22:03 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/16 15:21:12 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	init_philos(t_data *data)
 	}
 	data->ready = 1;
 	i = 0;
+	data->start = get_time();
 	while (i < data->n_filo)
 	{
 		if (pthread_join(data->philos[i].philo, NULL) != 0)
