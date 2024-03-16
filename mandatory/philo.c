@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/15 16:44:08 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/16 01:28:26 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,6 @@ int	init_philos(t_data *data)
 	while (i < data->n_filo)
 	{
 		data->philos[i].id = i + 1;
-		if ((i + 1) % 2 == 0)
-		{
-			data->philos[i].left_fork = &(data->forks[i]);
-			data->philos[i].right_fork = &(data->forks[(i + 1) % data->n_filo]);
-		}
-		else
-		{
-			data->philos[i].left_fork = &(data->forks[(i + 1) % data->n_filo]);
-			data->philos[i].right_fork = &(data->forks[i]);
-		}
 		if (pthread_create(&(data->philos[i].philo), NULL, &thread_handler, &(data->philos[i])) != 0)
 			return (0);
 		i++;
@@ -70,6 +60,30 @@ int	init_philos(t_data *data)
 			return (0);
 		i++;
 	}
+	return (1);
+}
+
+int	init_data(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->n_filo)
+	{
+		if ((i + 1) % 2 == 0)
+		{
+			data->philos[i].left_fork = &(data->forks[i]);
+			data->philos[i].right_fork = &(data->forks[(i + 1) % data->n_filo]);
+		}
+		else
+		{
+			data->philos[i].left_fork = &(data->forks[(i + 1) % data->n_filo]);
+			data->philos[i].right_fork = &(data->forks[i]);
+		}
+		i++;
+	}
+	if (!init_philos(data))
+		return (0);
 	return (1);
 }
 
@@ -85,7 +99,7 @@ int	init(t_data *data)
 			return (0);
 		i++;
 	}
-	if (!init_philos(data))
+	if (!init_data(data))
 		return (0);
 	return (1);
 }
