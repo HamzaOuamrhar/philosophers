@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/16 02:27:49 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/16 14:10:29 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,4 +131,5 @@ int	main(int argc, char **argv)
 		printf("Thread error!\n");
 		return (1);
 	}
+	return (0);
 }
