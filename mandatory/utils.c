@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:20 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/15 22:40:16 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/16 00:55:52 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,13 @@ long	get_time()
 		return (0);
 	time = (t_time.tv_sec * 1000) + (t_time.tv_usec / 1000);
 	return (time);
+}
+
+void	usleep_fnc(long mls)
+{
+	long	start;
+
+	start = get_time();
+	while (get_time() - start < mls)
+		usleep(100);
 }
