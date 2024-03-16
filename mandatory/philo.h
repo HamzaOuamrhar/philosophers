@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/16 01:00:18 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/16 02:10:16 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,26 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-typedef struct t_fork
+typedef struct s_philo t_philo;
+typedef struct s_data t_data;
+typedef struct s_fork t_fork;
+
+struct s_fork
 {
 	pthread_mutex_t	fork;
 	int				id;
-}	t_fork;
+};
 
-typedef struct t_philo
+struct s_philo
 {
 	pthread_t	philo;
 	int			id;
 	t_fork		*left_fork;
 	t_fork		*right_fork;
-}	t_philo;
+	t_data		*data;
+};
 
-
-typedef struct t_data
+struct s_data
 {
 	t_philo	philos[200];
 	t_fork	forks[200];
@@ -44,7 +48,10 @@ typedef struct t_data
 	int	t_eat;
 	int	t_sleep;
 	int	n_must_eat;
-}	t_data;
+	int	end;
+	int	ready;
+};
+
 
 int	ft_atoi(const char *str);
 int	are_valide_args(int argc, char **argv);
