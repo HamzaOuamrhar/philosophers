@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/16 16:43:45 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/16 16:46:40 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ void	sleeping(t_philo *philo)
 	precise_usleep(philo->data->t_sleep);
 }
 
+void	thinking(t_philo *philo)
+{
+	write_logs("thinking", philo->data);
+}
+
 void	*thread_handler(void *p)
 {
 	t_philo *philo = (t_philo *)p;
@@ -68,6 +73,7 @@ void	*thread_handler(void *p)
 	;
 	eating(philo);
 	sleeping(philo);
+	thinking(philo);
 	return (NULL);
 }
 
