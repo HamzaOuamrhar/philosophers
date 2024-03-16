@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:20 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/16 16:39:42 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/16 23:46:33 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void	write_logs(char *s, t_data *data)
 
 	timestamp = get_time() - data->start;
 	if (!data->end && ft_strcmp(s, "taken"))
-		printf("%ld %d has taken a fork\n", timestamp, data->philos->id);
+		printf("[%ld] %d has taken a fork\n", timestamp, data->philos->id);
 	else if (!data->end && ft_strcmp(s, "eating"))
-		printf("%ld %d is eating\n", timestamp, data->philos->id);
+		printf("[%ld] %d is eating\n", timestamp, data->philos->id);
 	else if (!data->end && ft_strcmp(s, "sleeping"))
-		printf("%ld %d is sleeping\n", timestamp, data->philos->id);
+		printf("[%ld] %d is sleeping\n", timestamp, data->philos->id);
 	else if (!data->end && ft_strcmp(s, "thinking"))
-		printf("%ld %d is thinking\n", timestamp, data->philos->id);
+		printf("[%ld] %d is thinking\n", timestamp, data->philos->id);
 }
