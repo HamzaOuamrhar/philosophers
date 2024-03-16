@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/16 14:18:05 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/16 14:22:03 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	init_data(t_data *data)
 	int	i;
 
 	data->ready = 0;
+	data->end = 0;
 	i = 0;
 	while (i < data->n_filo)
 	{

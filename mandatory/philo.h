@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/16 14:19:19 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/16 14:21:51 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ struct s_data
 	int	t_sleep;
 	int	n_must_eat;
 	int	ready;
+	int	end;
 };
 
 
