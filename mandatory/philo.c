@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/16 16:38:06 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/16 16:43:45 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,19 @@ void	eating(t_philo *philo)
 	pthread_mutex_unlock(&philo->left_fork->fork);
 }
 
+void	sleeping(t_philo *philo)
+{
+	write_logs("sleeping", philo->data);
+	precise_usleep(philo->data->t_sleep);
+}
+
 void	*thread_handler(void *p)
 {
 	t_philo *philo = (t_philo *)p;
 	while (!philo->data->ready)
 	;
 	eating(philo);
+	sleeping(philo);
 	return (NULL);
 }
 
