@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/16 00:50:55 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/16 01:00:18 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ typedef struct t_data
 int	ft_atoi(const char *str);
 int	are_valide_args(int argc, char **argv);
 long	get_time();
-void	usleep_fnc(long mls);
+void	precise_usleep(long mls);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:20 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/16 00:55:52 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/16 01:00:07 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ long	get_time()
 	return (time);
 }
 
-void	usleep_fnc(long mls)
+void	precise_usleep(long mls)
 {
 	long	start;
 
