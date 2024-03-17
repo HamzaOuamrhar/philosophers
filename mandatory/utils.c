@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:20 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/17 15:03:51 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:57:02 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	write_logs(char *s, t_philo *philo)
 {
 	long	timestamp;
 
+	if (philo->full)
+		return ;
 	timestamp = get_time() - philo->data->start;
 	if (!philo->data->end && ft_strcmp(s, "taken") == 0)
 		printf("[%ld] %d has taken a fork\n", timestamp, philo->id);
