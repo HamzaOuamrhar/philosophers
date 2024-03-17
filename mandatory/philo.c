@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/16 23:37:19 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/17 01:40:54 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ int	parse(int argc, char **argv, t_data *data)
 void	eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->right_fork->fork);
-	write_logs("taken", philo->data);
+	write_logs("taken", philo);
 	pthread_mutex_lock(&philo->left_fork->fork);
-	write_logs("taken", philo->data);
+	write_logs("taken", philo);
 
 
 	pthread_mutex_lock(&philo->philo_lock);
 	philo->meals_eaten += 1;
 	philo->last_meal_time = get_time();
-	write_logs("eating", philo->data);
+	write_logs("eating", philo);
 	precise_usleep(philo->data->t_eat);
 	if (philo->meals_eaten == philo->data->n_must_eat)
 		philo->full = 1;
@@ -57,13 +57,13 @@ void	eating(t_philo *philo)
 
 void	sleeping(t_philo *philo)
 {
-	write_logs("sleeping", philo->data);
+	write_logs("sleeping", philo);
 	precise_usleep(philo->data->t_sleep);
 }
 
 void	thinking(t_philo *philo)
 {
-	write_logs("thinking", philo->data);
+	write_logs("thinking", philo);
 }
 
 void	*thread_handler(void *p)

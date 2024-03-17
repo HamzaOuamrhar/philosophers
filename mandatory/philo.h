@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/16 16:32:25 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/17 01:39:41 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ int	are_valide_args(int argc, char **argv);
 long	get_time();
 void	precise_usleep(long mls);
 int	ft_strcmp(char *s1, char *s2);
-void	write_logs(char *s, t_data *data);
+void	write_logs(char *s, t_philo *philo);
 
 #endif

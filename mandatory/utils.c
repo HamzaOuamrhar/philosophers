@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:20 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/16 23:46:33 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/17 01:40:31 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,17 @@ void	precise_usleep(long mls)
 		usleep(100);
 }
 
-void	write_logs(char *s, t_data *data)
+void	write_logs(char *s, t_philo *philo)
 {
 	long	timestamp;
 
-	timestamp = get_time() - data->start;
-	if (!data->end && ft_strcmp(s, "taken"))
-		printf("[%ld] %d has taken a fork\n", timestamp, data->philos->id);
-	else if (!data->end && ft_strcmp(s, "eating"))
-		printf("[%ld] %d is eating\n", timestamp, data->philos->id);
-	else if (!data->end && ft_strcmp(s, "sleeping"))
-		printf("[%ld] %d is sleeping\n", timestamp, data->philos->id);
-	else if (!data->end && ft_strcmp(s, "thinking"))
-		printf("[%ld] %d is thinking\n", timestamp, data->philos->id);
+	timestamp = get_time() - philo->data->start;
+	if (!philo->data->end && ft_strcmp(s, "taken"))
+		printf("[%ld] %d has taken a fork\n", timestamp, philo->id);
+	else if (!philo->data->end && ft_strcmp(s, "eating"))
+		printf("[%ld] %d is eating\n", timestamp, philo->id);
+	else if (!philo->data->end && ft_strcmp(s, "sleeping"))
+		printf("[%ld] %d is sleeping\n", timestamp, philo->id);
+	else if (!philo->data->end && ft_strcmp(s, "thinking"))
+		printf("[%ld] %d is thinking\n", timestamp, philo->id);
 }
