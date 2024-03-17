@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/17 16:55:37 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:59:48 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	*thread_handler(void *p)
 	;
 	while (!philo->data->end)
 	{
+		if (philo->full)
+			break;
 		eating(philo);
 		sleeping(philo);
 		thinking(philo);
