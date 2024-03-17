@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/17 16:48:57 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:49:31 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int	init_philos(t_data *data)
 			return (0);
 		i++;
 	}
+	data->end = 1;
 	return (1);
 }
 
