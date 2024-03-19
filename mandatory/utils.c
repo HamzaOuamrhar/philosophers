@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:20 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/17 16:57:02 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/19 22:52:52 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ long	get_time()
 
 void	precise_usleep(long mls)
 {
+	// need to check every 10ms if simulation ends
 	long	start;
 
 	start = get_time();
