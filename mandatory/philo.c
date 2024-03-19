@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/18 00:58:15 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/19 22:44:50 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	init_philos(t_data *data)
 {
 	int	i;
 
+	// is needed to initialize it for every philosopher
 	pthread_mutex_init(&data->philos->philo_lock, NULL);
 	data->philos->full = 0;
 	data->philos->meals_eaten = 0;
@@ -93,15 +94,14 @@ int	init_philos(t_data *data)
 		i++;
 	}
 	data->ready = 1;
-	i = 0;
 	data->start = get_time();
+	i = 0;
 	while (i < data->n_filo)
 	{
 		if (pthread_join(data->philos[i].philo, NULL) != 0)
 			return (0);
 		i++;
 	}
-	data->end = 1;
 	return (1);
 }
 
