@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/17 01:39:41 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:55:20 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ struct s_philo
 	int			meals_eaten;
 	long		last_meal_time;
 	int			full;
-	pthread_mutex_t	philo_lock;
 };
 
 struct s_data
