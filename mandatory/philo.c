@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/22 02:32:22 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:36:09 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,15 @@ void	thinking(t_philo *philo)
 
 void	*thread_handler(void *p)
 {
-	t_philo *philo = (t_philo *)p;
+	t_philo	*philo;
+
+	philo = (t_philo *)p;
 	while (!philo->data->ready)
-	;
+		;
 	while (!philo->data->end)
 	{
 		if (philo->full)
-			break;
+			break ;
 		eating(philo);
 		sleeping(philo);
 		thinking(philo);
@@ -84,12 +86,16 @@ void	check_for_die(t_data *data)
 	while (!data->end)
 	{
 		i = 0;
-		while(!data->end && i < data->n_filo)
+		while (!data->end && i < data->n_filo)
 		{
-			if ((data->philos[i].meals_eaten != 0 && (get_time() - data->philos[i].last_meal_time > data->t_die))
-				|| (data->philos[i].meals_eaten == 0 && (get_time() - data->start > data->t_die)))
+			if ((data->philos[i].meals_eaten != 0
+					&& (get_time()
+						- data->philos[i].last_meal_time > data->t_die))
+				|| (data->philos[i].meals_eaten == 0
+					&& (get_time() - data->start > data->t_die)))
 			{
-				printf("[%ld] %d died\n",(get_time() - data->start), data->philos[i].id);
+				printf("[%ld] %d died\n", (get_time() - data->start),
+					data->philos[i].id);
 				data->end = 1;
 			}
 			i++;
@@ -107,7 +113,8 @@ int	init_philos(t_data *data)
 		data->philos[i].id = i + 1;
 		data->philos[i].full = 0;
 		data->philos[i].meals_eaten = 0;
-		if (pthread_create(&(data->philos[i].philo), NULL, &thread_handler, &(data->philos[i])) != 0)
+		if (pthread_create(&(data->philos[i].philo), NULL, &thread_handler,
+				&(data->philos[i])) != 0)
 			return (0);
 		i++;
 	}
