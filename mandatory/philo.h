@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/22 01:11:07 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:38:37 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,9 @@ long	get_time(void);
 void	precise_usleep(long mls);
 int		ft_strcmp(char *s1, char *s2);
 void	write_logs(char *s, t_philo *philo);
+void	*thread_handler(void *p);
+void	thinking(t_philo *philo);
+void	sleeping(t_philo *philo);
+void	eating(t_philo *philo);
 
 #endif

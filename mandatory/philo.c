@@ -6,78 +6,11 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/22 13:36:09 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:39:31 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	parse(int argc, char **argv, t_data *data)
-{
-	if (!are_valide_args(argc, argv))
-		return (0);
-	data->n_filo = ft_atoi(argv[1]);
-	data->n_forks = data->n_filo;
-	data->t_die = ft_atoi(argv[2]);
-	data->t_eat = ft_atoi(argv[3]);
-	data->t_sleep = ft_atoi(argv[4]);
-	if (argc == 6)
-	{
-		data->n_must_eat = ft_atoi(argv[5]);
-		if (!data->n_must_eat)
-			return (0);
-	}
-	if (!data->n_filo || data->n_filo > 200 || data->t_die < 60
-		|| data->t_eat < 60
-		|| data->t_sleep < 60)
-		return (0);
-	return (1);
-}
-
-void	eating(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->right_fork->fork);
-	write_logs("taken", philo);
-	pthread_mutex_lock(&philo->left_fork->fork);
-	write_logs("taken", philo);
-	write_logs("eating", philo);
-	philo->last_meal_time = get_time();
-	philo->meals_eaten += 1;
-	if (philo->meals_eaten == philo->data->n_must_eat)
-		philo->full = 1;
-	precise_usleep(philo->data->t_eat);
-	pthread_mutex_unlock(&philo->right_fork->fork);
-	pthread_mutex_unlock(&philo->left_fork->fork);
-}
-
-void	sleeping(t_philo *philo)
-{
-	write_logs("sleeping", philo);
-	precise_usleep(philo->data->t_sleep);
-}
-
-void	thinking(t_philo *philo)
-{
-	write_logs("thinking", philo);
-}
-
-void	*thread_handler(void *p)
-{
-	t_philo	*philo;
-
-	philo = (t_philo *)p;
-	while (!philo->data->ready)
-		;
-	while (!philo->data->end)
-	{
-		if (philo->full)
-			break ;
-		eating(philo);
-		sleeping(philo);
-		thinking(philo);
-	}
-	return (NULL);
-}
 
 void	check_for_die(t_data *data)
 {

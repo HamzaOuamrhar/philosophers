@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:20 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/22 01:35:22 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:39:53 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,26 @@ void	write_logs(char *s, t_philo *philo)
 		printf("[%ld] %d is sleeping\n", timestamp, philo->id);
 	else if (!philo->data->end && ft_strcmp(s, "thinking") == 0)
 		printf("[%ld] %d is thinking\n", timestamp, philo->id);
+}
+
+int	parse(int argc, char **argv, t_data *data)
+{
+	if (!are_valide_args(argc, argv))
+		return (0);
+	data->n_filo = ft_atoi(argv[1]);
+	data->n_forks = data->n_filo;
+	data->t_die = ft_atoi(argv[2]);
+	data->t_eat = ft_atoi(argv[3]);
+	data->t_sleep = ft_atoi(argv[4]);
+	if (argc == 6)
+	{
+		data->n_must_eat = ft_atoi(argv[5]);
+		if (!data->n_must_eat)
+			return (0);
+	}
+	if (!data->n_filo || data->n_filo > 200 || data->t_die < 60
+		|| data->t_eat < 60
+		|| data->t_sleep < 60)
+		return (0);
+	return (1);
 }
