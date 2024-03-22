@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/20 16:55:20 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/22 01:11:07 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-typedef struct s_philo t_philo;
-typedef struct s_data t_data;
-typedef struct s_fork t_fork;
+typedef struct s_philo	t_philo;
+typedef struct s_data	t_data;
+typedef struct s_fork	t_fork;
 
 struct s_fork
 {
@@ -44,23 +44,22 @@ struct s_data
 {
 	t_philo	philos[200];
 	t_fork	forks[200];
-	int	n_filo;
-	int	n_forks;
-	int	t_die;
-	int	t_eat;
-	int	t_sleep;
-	int	n_must_eat;
-	int	ready;
-	int	end;
+	int		n_filo;
+	int		n_forks;
+	int		t_die;
+	int		t_eat;
+	int		t_sleep;
+	int		n_must_eat;
+	int		ready;
+	int		end;
 	long	start;
 };
 
-
-int	ft_atoi(const char *str);
-int	are_valide_args(int argc, char **argv);
-long	get_time();
+int		ft_atoi(const char *str);
+int		are_valide_args(int argc, char **argv);
+long	get_time(void);
 void	precise_usleep(long mls);
-int	ft_strcmp(char *s1, char *s2);
+int		ft_strcmp(char *s1, char *s2);
 void	write_logs(char *s, t_philo *philo);
 
 #endif
