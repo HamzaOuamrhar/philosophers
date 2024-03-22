@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/22 00:00:51 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/22 00:40:47 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void	eating(t_philo *philo)
 	pthread_mutex_lock(&philo->left_fork->fork);
 	write_logs("taken", philo);
 	write_logs("eating", philo);
-	precise_usleep(philo->data->t_eat);
 	philo->last_meal_time = get_time();
 	philo->meals_eaten += 1;
 	if (philo->meals_eaten == philo->data->n_must_eat)
 		philo->full = 1;
+	precise_usleep(philo->data->t_eat);
 	pthread_mutex_unlock(&philo->right_fork->fork);
 	pthread_mutex_unlock(&philo->left_fork->fork);
 }
@@ -98,10 +98,15 @@ int	init_philos(t_data *data)
 		i = 0;
 		while(!data->end && i < data->n_filo)
 		{
-			if ((data->philos[i].meals_eaten != 0 && (get_time() - data->philos[i].last_meal_time > data->t_die))
-				|| (data->philos[i].meals_eaten == 0 && (get_time() - data->start > data->t_die)))
+			if ((data->philos[i].meals_eaten != 0 && (get_time() - data->philos[i].last_meal_time > data->t_die)))
 			{
-				printf("[%ld] %d died\n",(get_time() - data->start), data->philos[i].id);
+				printf("[%ld] %d died [meals]\n",(get_time() - data->start), data->philos[i].id);
+				data->end = 1;
+				break;
+			}
+			else if ((data->philos[i].meals_eaten == 0 && (get_time() - data->start > data->t_die)))
+			{
+				printf("[%ld] %d died [start]\n",(get_time() - data->start), data->philos[i].id);
 				data->end = 1;
 				break;
 			}
