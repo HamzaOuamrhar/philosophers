@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/22 00:40:47 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/22 02:32:22 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,42 +77,43 @@ void	*thread_handler(void *p)
 	return (NULL);
 }
 
+void	check_for_die(t_data *data)
+{
+	int	i;
+
+	while (!data->end)
+	{
+		i = 0;
+		while(!data->end && i < data->n_filo)
+		{
+			if ((data->philos[i].meals_eaten != 0 && (get_time() - data->philos[i].last_meal_time > data->t_die))
+				|| (data->philos[i].meals_eaten == 0 && (get_time() - data->start > data->t_die)))
+			{
+				printf("[%ld] %d died\n",(get_time() - data->start), data->philos[i].id);
+				data->end = 1;
+			}
+			i++;
+		}
+	}
+}
+
 int	init_philos(t_data *data)
 {
 	int	i;
-	data->philos->full = 0;
-	data->philos->meals_eaten = 0;
+
 	i = 0;
 	while (i < data->n_filo)
 	{
 		data->philos[i].id = i + 1;
+		data->philos[i].full = 0;
+		data->philos[i].meals_eaten = 0;
 		if (pthread_create(&(data->philos[i].philo), NULL, &thread_handler, &(data->philos[i])) != 0)
 			return (0);
 		i++;
 	}
 	data->ready = 1;
 	data->start = get_time();
-	i = 0;
-	while (!data->end)
-	{
-		i = 0;
-		while(!data->end && i < data->n_filo)
-		{
-			if ((data->philos[i].meals_eaten != 0 && (get_time() - data->philos[i].last_meal_time > data->t_die)))
-			{
-				printf("[%ld] %d died [meals]\n",(get_time() - data->start), data->philos[i].id);
-				data->end = 1;
-				break;
-			}
-			else if ((data->philos[i].meals_eaten == 0 && (get_time() - data->start > data->t_die)))
-			{
-				printf("[%ld] %d died [start]\n",(get_time() - data->start), data->philos[i].id);
-				data->end = 1;
-				break;
-			}
-			i++;
-		}
-	}
+	check_for_die(data);
 	i = 0;
 	while (i < data->n_filo)
 	{
