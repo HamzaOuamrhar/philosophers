@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/20 16:55:25 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/22 00:00:51 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,22 @@ int	init_philos(t_data *data)
 	}
 	data->ready = 1;
 	data->start = get_time();
+	i = 0;
+	while (!data->end)
+	{
+		i = 0;
+		while(!data->end && i < data->n_filo)
+		{
+			if ((data->philos[i].meals_eaten != 0 && (get_time() - data->philos[i].last_meal_time > data->t_die))
+				|| (data->philos[i].meals_eaten == 0 && (get_time() - data->start > data->t_die)))
+			{
+				printf("[%ld] %d died\n",(get_time() - data->start), data->philos[i].id);
+				data->end = 1;
+				break;
+			}
+			i++;
+		}
+	}
 	i = 0;
 	while (i < data->n_filo)
 	{
