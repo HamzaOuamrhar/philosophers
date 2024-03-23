@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/23 02:18:50 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/23 15:06:32 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,15 @@ void	check_for_die(t_data *data)
 {
 	int	i;
 
-	while (!data->end)
+	while (!data->end && !data->philos->full)
 	{
 		i = 0;
 		while (!data->end && i < data->n_filo)
 		{
 			if ((data->philos[i].meals_eaten != 0
 					&& (get_time()
-						- data->philos[i].last_meal_time > data->t_die))
+						- data->philos[i].last_meal_time > data->t_die)
+							&& data->philos[i].meals_eaten != data->n_must_eat)
 				|| (data->philos[i].meals_eaten == 0
 					&& (get_time() - data->start > data->t_die)))
 			{
