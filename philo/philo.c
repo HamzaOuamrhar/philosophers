@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/22 13:39:31 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/23 02:18:50 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,10 +122,21 @@ int	main(int argc, char **argv)
 		printf("Some arguments arn't valide!\n");
 		return (1);
 	}
-	if (!init(&data))
+	if (data.n_filo == 1)
 	{
-		printf("Error!\n");
-		return (1);
+		if (!one_philo(&data))
+		{
+			printf("Error\n");
+			return (1);
+		}
+	}
+	else
+	{
+		if ((!init(&data)))
+		{
+			printf("Error!\n");
+			return (1);
+		}
 	}
 	return (0);
 }

@@ -6,12 +6,12 @@
 #    By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/09 23:13:14 by houamrha          #+#    #+#              #
-#    Updated: 2024/03/22 16:38:20 by houamrha         ###   ########.fr        #
+#    Updated: 2024/03/23 02:22:09 by houamrha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc  -Wall -Wextra -Werror -g -fsanitize=address
-SRC = philo.c utils.c ft_atoi.c ft_strcmp.c thread_handler.c
+CC = cc  -Wall -Wextra -Werror
+SRC = philo.c utils.c ft_atoi.c ft_strcmp.c thread_handler.c one_philo.c
 OBJ = $(SRC:.c=.o)
 NAME = philo
 
