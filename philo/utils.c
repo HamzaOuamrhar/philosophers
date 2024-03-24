@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:20 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/23 01:56:49 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/24 21:36:59 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ void	write_logs(char *s, t_philo *philo)
 	if (philo->full)
 		return ;
 	timestamp = get_time() - philo->data->start;
-	if (!philo->data->end && ft_strcmp(s, "taken") == 0)
+	if (!get_value(philo->data->end, philo->data->data_lock) && ft_strcmp(s, "taken") == 0)
 		printf("[%ld] %d has taken a fork\n", timestamp, philo->id);
-	else if (!philo->data->end && ft_strcmp(s, "eating") == 0)
+	else if (!get_value(philo->data->end, philo->data->data_lock) && ft_strcmp(s, "eating") == 0)
 		printf("[%ld] %d is eating\n", timestamp, philo->id);
-	else if (!philo->data->end && ft_strcmp(s, "sleeping") == 0)
+	else if (!get_value(philo->data->end, philo->data->data_lock) && ft_strcmp(s, "sleeping") == 0)
 		printf("[%ld] %d is sleeping\n", timestamp, philo->id);
-	else if (!philo->data->end && ft_strcmp(s, "thinking") == 0)
+	else if (!get_value(philo->data->end, philo->data->data_lock) && ft_strcmp(s, "thinking") == 0)
 		printf("[%ld] %d is thinking\n", timestamp, philo->id);
 }
 

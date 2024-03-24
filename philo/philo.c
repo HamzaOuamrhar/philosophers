@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/24 21:31:18 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/24 21:33:03 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	check_for_die(t_data *data)
 	while (!get_value(data->end, data->data_lock) && !all_full(data))
 	{
 		i = 0;
-		while (!data->end && i < data->n_filo)
+		while (!get_value(data->end, data->data_lock) && i < data->n_filo)
 		{
 			if ((data->philos[i].meals_eaten != 0
 					&& (get_time()
@@ -30,7 +30,7 @@ void	check_for_die(t_data *data)
 			{
 				printf("[%ld] %d died\n", (get_time() - data->start),
 					data->philos[i].id);
-				data->end = 1;
+				set_value(&data->end, data->data_lock, 1);
 			}
 			i++;
 		}

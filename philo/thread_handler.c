@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 13:37:11 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/24 21:23:59 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/24 21:34:27 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	*thread_handler(void *p)
 	philo = (t_philo *)p;
 	while (!get_value(philo->data->ready, philo->data->data_lock))
 		;
-	while (!philo->data->end)
+	while (!get_value(philo->data->end, philo->data->data_lock))
 	{
 		if (philo->full)
 			break ;
