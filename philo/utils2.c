@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:06:02 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/24 21:18:28 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/24 23:17:52 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ int	all_full(t_data *data)
 }
 
 void	set_value(int *val, pthread_mutex_t data_lock, int value)
+{
+	pthread_mutex_lock(&data_lock);
+	*val = value;
+	pthread_mutex_unlock(&data_lock);
+}
+
+void	set_l_m_t(long *val, pthread_mutex_t data_lock, long value)
 {
 	pthread_mutex_lock(&data_lock);
 	*val = value;
