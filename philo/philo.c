@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/23 15:06:32 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/24 15:07:17 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	check_for_die(t_data *data)
 {
 	int	i;
 
-	while (!data->end && !data->philos->full)
+	while (!data->end && !all_full(data))
 	{
 		i = 0;
 		while (!data->end && i < data->n_filo)
