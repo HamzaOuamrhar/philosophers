@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/24 21:33:03 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/24 21:52:00 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	init_data(t_data *data)
 	int	i;
 
 	pthread_mutex_init(&data->data_lock, NULL);
+	pthread_mutex_init(&data->write_lock, NULL);
 	data->ready = 0;
 	data->end = 0;
 	i = 0;
