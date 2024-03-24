@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/24 15:07:17 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/24 21:21:32 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	init_philos(t_data *data)
 			return (0);
 		i++;
 	}
-	data->ready = 1;
+	set_value(&data->ready, data->data_lock, 1);
 	data->start = get_time();
 	check_for_die(data);
 	i = 0;
@@ -69,6 +69,7 @@ int	init_data(t_data *data)
 {
 	int	i;
 
+	pthread_mutex_init(&data->data_lock, NULL);
 	data->ready = 0;
 	data->end = 0;
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/24 15:07:32 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/24 21:18:48 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ struct s_data
 	int		ready;
 	int		end;
 	long	start;
+	pthread_mutex_t	data_lock;
 };
 
 int		ft_atoi(const char *str);
@@ -68,5 +69,7 @@ void	eating(t_philo *philo);
 int		parse(int argc, char **argv, t_data *data);
 int		one_philo(t_data *data);
 int		all_full(t_data *data);
+void	set_value(int *val, pthread_mutex_t data_lock, int value);
+int		get_value(int val, pthread_mutex_t data_lock);
 
 #endif
