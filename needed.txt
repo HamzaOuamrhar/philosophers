@@ -1,5 +1,5 @@
 lock unlock ready = 1;
-lock unlock while(!ready)
+lock unlock while(!ready);
 lock unlock end flag in all parts
 check for end flag in the precise sleep function
 lock unlock the write_logs function
