@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/28 23:11:27 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/28 21:57:19 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ struct s_data
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	edit_lock;
 	pthread_mutex_t	all_full_m;
-	pthread_mutex_t	end_m;
-	int end;
+	pthread_mutex_t	die_m;
 };
 
 int		ft_atoi(const char *str);

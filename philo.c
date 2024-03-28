@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/28 23:12:51 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/28 22:00:49 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int	init_mutexes(t_data *data)
 	int	i = 0;
 
 	if (pthread_mutex_init(&data->write_lock, NULL) != 0)
-		return (0);
-	if (pthread_mutex_init(&data->end_m, NULL) != 0)
 		return (0);
 	while (i < data->n_filo)
 	{
@@ -49,6 +47,36 @@ void	assign_forks(t_data *data)
 			data->philos[i].right_fork = &(data->forks[i]);
 		}
 		i++;
+	}
+}
+
+void	check_for_die(t_data *data)
+{
+	int	i;
+
+	while (!get_value(data->die, data->die_m))
+	{
+		i = 0;
+		while (!get_value(data->die, data->die_m) && i < data->n_filo)
+		{
+			pthread_mutex_lock(&data->philos[i].l_m_t_m);
+			pthread_mutex_lock(&data->philos[i].m_e_m);
+			if ((get_time() - data->philos[i].last_meal_time > data->t_die && data->philos[i].meals_eaten != 0)
+			|| (get_time() - data->start > data->t_die && data->philos[i].meals_eaten == 0))
+			{
+				write_logs("die", &data->philos[i]);
+				pthread_mutex_lock(&data->write_lock);
+				pthread_mutex_lock(&data->die_m);
+				data->die = 1;
+				pthread_mutex_unlock(&data->die_m);
+				pthread_mutex_unlock(&data->philos[i].l_m_t_m);
+				pthread_mutex_unlock(&data->philos[i].m_e_m);
+				break ;
+			}
+			pthread_mutex_unlock(&data->philos[i].m_e_m);
+			pthread_mutex_unlock(&data->philos[i].l_m_t_m);
+			i++;
+		}
 	}
 }
 
@@ -127,7 +155,6 @@ int	init_forks(t_data *data)
 int	multiple_philos(t_data *data)
 {
 	data->all_full = 0;
-	data->end = 0;
 	data->start = get_time();
 	if (!init_mutexes(data))
 		return (0);
