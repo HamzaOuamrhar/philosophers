@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/28 22:00:49 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/28 23:11:50 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	init_mutexes(t_data *data)
 	int	i = 0;
 
 	if (pthread_mutex_init(&data->write_lock, NULL) != 0)
+		return (0);
+	if (pthread_mutex_init(&data->end_m, NULL) != 0)
 		return (0);
 	while (i < data->n_filo)
 	{
@@ -155,6 +157,7 @@ int	init_forks(t_data *data)
 int	multiple_philos(t_data *data)
 {
 	data->all_full = 0;
+	data->end = 0;
 	data->start = get_time();
 	if (!init_mutexes(data))
 		return (0);
