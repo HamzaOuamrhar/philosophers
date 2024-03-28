@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:20 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/28 00:33:30 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/28 21:47:32 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	parse(int argc, char **argv, t_data *data)
 			return (0);
 	}
 	else
-		data->n_must_eat = -1;
+		data->n_must_eat = 1000000;
 	if (!data->n_filo || data->n_filo > 200 || data->t_die < 60
 		|| data->t_eat < 60
 		|| data->t_sleep < 60)

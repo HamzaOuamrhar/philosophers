@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/28 00:32:12 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/28 22:00:49 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@ int	init_mutexes(t_data *data)
 	int	i = 0;
 
 	if (pthread_mutex_init(&data->write_lock, NULL) != 0)
-		return (0);
-	if (pthread_mutex_init(&data->edit_lock, NULL) != 0)
-		return (0);
-	if (pthread_mutex_init(&data->all_full_m, NULL) != 0)
-		return (0);
-	if (pthread_mutex_init(&data->die_m, NULL) != 0)
 		return (0);
 	while (i < data->n_filo)
 	{
@@ -86,49 +80,30 @@ void	check_for_die(t_data *data)
 	}
 }
 
-int	philos_alive(t_philo *philo){
-	long	t;
-
+int	alive(t_philo *philo){
 	pthread_mutex_lock(&philo->l_m_t_m);
-	t = get_time() - philo->last_meal_time;
-	pthread_mutex_unlock(&philo->l_m_t_m);
-	if (t > philo->data->t_die)
+	if (get_time() - philo->last_meal_time > philo->data->t_die)
 	{
 		pthread_mutex_lock(&philo->data->write_lock);
-		printf("%ld %d died\n",
-			get_time() - philo->data->start, philo->id);
+		printf("%ld %d died\n", get_time() - philo->data->start, philo->id);
+		pthread_mutex_unlock(&philo->l_m_t_m);
 		return (0);
 	}
+	pthread_mutex_unlock(&philo->l_m_t_m);
 	return (1);
 }
 
-int philos_full(t_data *data)
+int philo_full(t_philo *philo)
 {
-	int i = 0;
-	while (i < data->n_filo)
+	pthread_mutex_lock(&philo->m_e_m);
+	if (philo->meals_eaten < philo->data->n_must_eat)
 	{
-		pthread_mutex_lock(&data->philos[i].m_e_m);
-		if (data->philos[i].meals_eaten < data->n_must_eat)
-		{
-			pthread_mutex_unlock(&data->philos[i].m_e_m);
-			return (0);
-		}
-		pthread_mutex_unlock(&data->philos[i].m_e_m);
-		i++;
+		pthread_mutex_unlock(&philo->m_e_m);
+		return (0);
 	}
-	pthread_mutex_lock(&data->write_lock);
+	pthread_mutex_unlock(&philo->m_e_m);
+	pthread_mutex_lock(&philo->data->write_lock);
 	return (1);
-}
-
-void detach(t_data *data)
-{
-	pthread_mutex_unlock(&data->write_lock);
-	int i = 0;
-	while (i < data->n_filo)
-	{
-		pthread_detach(data->philos[i].philo);
-		i++;
-	}
 }
 
 int	create_threads(t_data *data)
@@ -141,7 +116,7 @@ int	create_threads(t_data *data)
 		data->philos[i].id = i + 1;
 		data->philos[i].data = data;
 		data->philos[i].meals_eaten = 0;
-		data->philos[i].last_meal_time = 0;
+		data->philos[i].last_meal_time = get_time();
 		if (pthread_create(&data->philos[i].philo, NULL, &thread_handler, &data->philos[i]) != 0)
 			return (0);
 		i++;
@@ -151,9 +126,9 @@ int	create_threads(t_data *data)
 		i = 0;
 		while (i < data->n_filo)
 		{
-			if (!philos_alive(&data->philos[i]) || philos_full(data))
+			if (!alive(&data->philos[i]) || philo_full(&data->philos[i]))
 			{
-				detach(data);
+				pthread_mutex_unlock(&data->write_lock);
 				return (1);
 			}
 			i++;
@@ -179,9 +154,7 @@ int	init_forks(t_data *data)
 
 int	multiple_philos(t_data *data)
 {
-	data->ready = 0;
 	data->all_full = 0;
-	data->die = 0;
 	data->start = get_time();
 	if (!init_mutexes(data))
 		return (0);
