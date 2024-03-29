@@ -6,120 +6,37 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/29 22:55:51 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/29 23:56:36 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	init_mutexes(t_data *data)
-{
-	int	i = 0;
-
-	if (pthread_mutex_init(&data->write_lock, NULL) != 0)
-		return (0);
-	if (pthread_mutex_init(&data->full_m, NULL) != 0)
-		return (0);
-	while (i < data->n_filo)
-	{
-		if (pthread_mutex_init(&data->philos[i].m_e_m, NULL) != 0)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	assign_forks(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->n_filo)
-	{
-		if ((i + 1) % 2 == 0)
-		{
-			data->philos[i].left_fork = &(data->forks[i]);
-			data->philos[i].right_fork = &(data->forks[(i + 1) % data->n_filo]);
-		}
-		else
-		{
-			data->philos[i].left_fork = &(data->forks[(i + 1) % data->n_filo]);
-			data->philos[i].right_fork = &(data->forks[i]);
-		}
-		i++;
-	}
-}
-
-int	alive(t_philo *philo){
-	pthread_mutex_lock(&philo->m_e_m);
-	if (get_time() - philo->last_meal_time > philo->data->t_die)
-	{
-		pthread_mutex_lock(&philo->data->write_lock);
-		printf("%ld %d died\n", get_time() - philo->data->start, philo->id);
-		pthread_mutex_unlock(&philo->m_e_m);
-		return (0);
-	}
-	pthread_mutex_unlock(&philo->m_e_m);
-	return (1);
-}
-
-int philo_full(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->m_e_m);
-	pthread_mutex_lock(&philo->data->full_m);
-	if (philo->data->all_full != philo->data->n_filo)
-	{
-		pthread_mutex_unlock(&philo->data->full_m);
-		pthread_mutex_unlock(&philo->m_e_m);
-		return (0);
-	}
-	pthread_mutex_unlock(&philo->data->full_m);
-	pthread_mutex_unlock(&philo->m_e_m);
-	pthread_mutex_lock(&philo->data->write_lock);
-	return (1);
-}
-
 int	create_threads(t_data *data)
 {
 	int	i;
 
-	i = 0;
-	while (i < data->n_filo)
+	i = -1;
+	while (i++ < data->n_filo)
 	{
 		data->philos[i].id = i + 1;
 		data->philos[i].data = data;
 		data->philos[i].meals_eaten = 0;
 		data->philos[i].last_meal_time = get_time();
-		if (pthread_create(&data->philos[i].philo, NULL, &thread_handler, &data->philos[i]) != 0)
+		if (pthread_create(&data->philos[i].philo, NULL,
+				&thread_handler, &data->philos[i]) != 0)
 			return (0);
 		if (pthread_detach(data->philos[i].philo) != 0)
 			return (0);
-		i++;
 	}
 	while (1)
 	{
-		i = 0;
-		while (i < data->n_filo)
+		i = -1;
+		while (i++ < data->n_filo)
 		{
 			if (!alive(&data->philos[i]) || philo_full(&data->philos[i]))
 				return (1);
-			i++;
 		}
-	}
-	return (1);
-}
-
-int	init_forks(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->n_forks)
-	{
-		data->forks[i].id = i;
-		if (pthread_mutex_init(&data->forks[i].fork, NULL) != 0)
-			return (0);
-		i++;
 	}
 	return (1);
 }
@@ -143,31 +60,15 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	if (argc < 5 || argc > 6)
-	{
-		printf("Number of arguments not valide!\n");
-		return (1);
-	}
+		return (printf("Number of arguments not valide!\n"), 1);
 	if (!parse(argc, argv, &data))
-	{
-		printf("Some arguments arn't valide!\n");
-		return (1);
-	}
+		return (printf("Some arguments arn't valide!\n"), 1);
 	if (data.n_filo == 1)
-	{
 		if (!one_philo(&data))
-		{
-			printf("Error\n");
-			return (1);
-		}
-	}
+			return (printf("Error\n"), 1);
 	else
-	{
 		if ((!multiple_philos(&data)))
-		{
-			printf("Error!\n");
-			return (1);
-		}
-	}
+			return (printf("Error!\n"), 1);
 	destroy_mutexes(&data);
 	return (0);
 }

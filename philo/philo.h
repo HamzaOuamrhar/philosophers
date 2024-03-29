@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/29 22:50:05 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/29 23:53:53 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 
 # include <libc.h>
 
-
 typedef struct s_philo	t_philo;
 typedef struct s_data	t_data;
 typedef struct s_fork	t_fork;
@@ -33,28 +32,28 @@ struct s_fork
 
 struct s_philo
 {
-	pthread_t	philo;
-	int			id;
-	t_fork		*left_fork;
-	t_fork		*right_fork;
-	t_data		*data;
-	int			meals_eaten;
-	long		last_meal_time;
+	pthread_t		philo;
+	int				id;
+	t_fork			*left_fork;
+	t_fork			*right_fork;
+	t_data			*data;
+	int				meals_eaten;
+	long			last_meal_time;
 	pthread_mutex_t	m_e_m;
 };
 
 struct s_data
 {
-	t_philo	philos[200];
-	t_fork	forks[200];
-	int		n_filo;
-	int		n_forks;
-	int		t_die;
-	int		t_eat;
-	int		t_sleep;
-	int		n_must_eat;
-	long	start;
-	int		all_full;
+	t_philo			philos[200];
+	t_fork			forks[200];
+	int				n_filo;
+	int				n_forks;
+	int				t_die;
+	int				t_eat;
+	int				t_sleep;
+	int				n_must_eat;
+	long			start;
+	int				all_full;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	full_m;
 };
@@ -72,5 +71,10 @@ void	eating(t_philo *philo);
 int		parse(int argc, char **argv, t_data *data);
 int		one_philo(t_data *data);
 void	destroy_mutexes(t_data *data);
+int		init_mutexes(t_data *data);
+void	assign_forks(t_data *data);
+int		alive(t_philo *philo);
+int		philo_full(t_philo *philo);
+int		init_forks(t_data *data);
 
 #endif

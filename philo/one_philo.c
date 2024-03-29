@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 02:06:02 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/23 02:35:58 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/29 23:46:27 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*one_philo_handler(void *p)
 		if (get_time() - start > data->t_die)
 		{
 			printf("[%ld] 1 died\n", get_time() - start);
-			break;
+			break ;
 		}
 	}
 	return (NULL);
@@ -34,7 +34,8 @@ void	*one_philo_handler(void *p)
 int	one_philo(t_data *data)
 {
 	data->philos[0].id = 1;
-	if (pthread_create(&data->philos[0].philo, NULL, &one_philo_handler, data) != 0)
+	if (pthread_create(&data->philos[0].philo, NULL,
+			&one_philo_handler, data) != 0)
 		return (0);
 	if (pthread_join(data->philos[0].philo, NULL) != 0)
 		return (0);
