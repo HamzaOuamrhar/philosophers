@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:06:02 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/29 22:14:52 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/29 22:56:01 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,19 @@ void	*thread_handler(void *p)
 		thinking(philo);
 	}
 	return (NULL);
+}
+
+void	destroy_mutexes(t_data *data)
+{
+	int	i;
+
+	pthread_mutex_destroy(&data->full_m);
+	pthread_mutex_destroy(&data->write_lock);
+	i = 0;
+	while (i < data->n_filo)
+	{
+		pthread_mutex_destroy(&data->philos[i].m_e_m);
+		pthread_mutex_destroy(&data->forks[i].fork);
+		i++;
+	}
 }

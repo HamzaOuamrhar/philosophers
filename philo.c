@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/29 22:46:13 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/29 22:55:51 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,5 +168,6 @@ int	main(int argc, char **argv)
 			return (1);
 		}
 	}
+	destroy_mutexes(&data);
 	return (0);
 }
