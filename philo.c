@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/29 22:14:24 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/29 22:46:13 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int	create_threads(t_data *data)
 		data->philos[i].meals_eaten = 0;
 		data->philos[i].last_meal_time = get_time();
 		if (pthread_create(&data->philos[i].philo, NULL, &thread_handler, &data->philos[i]) != 0)
+			return (0);
+		if (pthread_detach(data->philos[i].philo) != 0)
 			return (0);
 		i++;
 	}
