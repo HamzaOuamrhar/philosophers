@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/28 22:00:49 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/29 00:26:09 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int	init_mutexes(t_data *data)
 	while (i < data->n_filo)
 	{
 		if (pthread_mutex_init(&data->philos[i].m_e_m, NULL) != 0)
-			return (0);
-		if (pthread_mutex_init(&data->philos[i].l_m_t_m, NULL) != 0)
 			return (0);
 		i++;
 	}
@@ -50,46 +48,16 @@ void	assign_forks(t_data *data)
 	}
 }
 
-void	check_for_die(t_data *data)
-{
-	int	i;
-
-	while (!get_value(data->die, data->die_m))
-	{
-		i = 0;
-		while (!get_value(data->die, data->die_m) && i < data->n_filo)
-		{
-			pthread_mutex_lock(&data->philos[i].l_m_t_m);
-			pthread_mutex_lock(&data->philos[i].m_e_m);
-			if ((get_time() - data->philos[i].last_meal_time > data->t_die && data->philos[i].meals_eaten != 0)
-			|| (get_time() - data->start > data->t_die && data->philos[i].meals_eaten == 0))
-			{
-				write_logs("die", &data->philos[i]);
-				pthread_mutex_lock(&data->write_lock);
-				pthread_mutex_lock(&data->die_m);
-				data->die = 1;
-				pthread_mutex_unlock(&data->die_m);
-				pthread_mutex_unlock(&data->philos[i].l_m_t_m);
-				pthread_mutex_unlock(&data->philos[i].m_e_m);
-				break ;
-			}
-			pthread_mutex_unlock(&data->philos[i].m_e_m);
-			pthread_mutex_unlock(&data->philos[i].l_m_t_m);
-			i++;
-		}
-	}
-}
-
 int	alive(t_philo *philo){
-	pthread_mutex_lock(&philo->l_m_t_m);
+	pthread_mutex_lock(&philo->m_e_m);
 	if (get_time() - philo->last_meal_time > philo->data->t_die)
 	{
 		pthread_mutex_lock(&philo->data->write_lock);
 		printf("%ld %d died\n", get_time() - philo->data->start, philo->id);
-		pthread_mutex_unlock(&philo->l_m_t_m);
+		pthread_mutex_unlock(&philo->m_e_m);
 		return (0);
 	}
-	pthread_mutex_unlock(&philo->l_m_t_m);
+	pthread_mutex_unlock(&philo->m_e_m);
 	return (1);
 }
 
@@ -154,7 +122,6 @@ int	init_forks(t_data *data)
 
 int	multiple_philos(t_data *data)
 {
-	data->all_full = 0;
 	data->start = get_time();
 	if (!init_mutexes(data))
 		return (0);

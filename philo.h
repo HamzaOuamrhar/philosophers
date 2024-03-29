@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/28 21:57:19 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/29 00:22:36 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ struct s_philo
 	int			meals_eaten;
 	long		last_meal_time;
 	pthread_mutex_t	m_e_m;
-	pthread_mutex_t	l_m_t_m;
 };
 
 struct s_data
@@ -55,13 +54,7 @@ struct s_data
 	int		t_sleep;
 	int		n_must_eat;
 	long	start;
-	int		ready;
-	int		all_full;
-	int		die;
 	pthread_mutex_t	write_lock;
-	pthread_mutex_t	edit_lock;
-	pthread_mutex_t	all_full_m;
-	pthread_mutex_t	die_m;
 };
 
 int		ft_atoi(const char *str);
