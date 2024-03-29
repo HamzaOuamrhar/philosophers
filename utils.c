@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:20 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/28 21:47:32 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/29 22:37:15 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ void	write_logs(char *s, t_philo *philo)
 	if (ft_strcmp("taken", s) == 0)
 		printf("%ld %d has taken a fork\n", timestamp, philo->id);
 	else if (ft_strcmp("eating", s) == 0)
-		printf("%ld %d eating\n", timestamp, philo->id);
+		printf("%ld %d is eating\n", timestamp, philo->id);
 	else if (ft_strcmp("sleeping", s) == 0)
-		printf("%ld %d sleeping\n", timestamp, philo->id);
+		printf("%ld %d is sleeping\n", timestamp, philo->id);
 	else if (ft_strcmp("thinking", s) == 0)
-		printf("%ld %d thinking\n", timestamp, philo->id);
+		printf("%ld %d is thinking\n", timestamp, philo->id);
 	pthread_mutex_unlock(&philo->data->write_lock);
 }
