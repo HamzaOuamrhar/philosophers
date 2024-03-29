@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/29 01:56:24 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/29 22:02:17 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	alive(t_philo *philo){
 int philo_full(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->m_e_m);
-	if (philo->meals_eaten < philo->data->n_must_eat)
+	if (philo->data->all_full != philo->data->n_filo)
 	{
 		pthread_mutex_unlock(&philo->m_e_m);
 		return (0);
@@ -120,6 +120,7 @@ int	init_forks(t_data *data)
 int	multiple_philos(t_data *data)
 {
 	data->start = get_time();
+	data->all_full = 0;
 	if (!init_mutexes(data))
 		return (0);
 	if (!init_forks(data))

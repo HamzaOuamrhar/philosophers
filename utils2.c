@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:06:02 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/29 00:22:58 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/29 22:01:36 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	eating(t_philo *philo)
 	pthread_mutex_lock(&philo->m_e_m);
 	philo->last_meal_time = get_time();
 	philo->meals_eaten += 1;
+	if (philo->meals_eaten == philo->data->n_must_eat)
+		philo->data->all_full += 1;
 	pthread_mutex_unlock(&philo->m_e_m);
 
 	write_logs("eating", philo);
