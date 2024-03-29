@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/29 00:26:09 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/29 01:56:24 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,7 @@ int	create_threads(t_data *data)
 		while (i < data->n_filo)
 		{
 			if (!alive(&data->philos[i]) || philo_full(&data->philos[i]))
-			{
-				pthread_mutex_unlock(&data->write_lock);
 				return (1);
-			}
 			i++;
 		}
 	}
