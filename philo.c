@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/29 22:02:17 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/29 22:14:24 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	init_mutexes(t_data *data)
 	int	i = 0;
 
 	if (pthread_mutex_init(&data->write_lock, NULL) != 0)
+		return (0);
+	if (pthread_mutex_init(&data->full_m, NULL) != 0)
 		return (0);
 	while (i < data->n_filo)
 	{
@@ -64,11 +66,14 @@ int	alive(t_philo *philo){
 int philo_full(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->m_e_m);
+	pthread_mutex_lock(&philo->data->full_m);
 	if (philo->data->all_full != philo->data->n_filo)
 	{
+		pthread_mutex_unlock(&philo->data->full_m);
 		pthread_mutex_unlock(&philo->m_e_m);
 		return (0);
 	}
+	pthread_mutex_unlock(&philo->data->full_m);
 	pthread_mutex_unlock(&philo->m_e_m);
 	pthread_mutex_lock(&philo->data->write_lock);
 	return (1);
