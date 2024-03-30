@@ -6,12 +6,12 @@
 #    By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/09 23:13:14 by houamrha          #+#    #+#              #
-#    Updated: 2024/03/29 23:54:19 by houamrha         ###   ########.fr        #
+#    Updated: 2024/03/30 00:25:29 by houamrha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc  -Wall -Wextra -Werror
-SRC = philo.c utils.c ft_atoi.c ft_strcmp.c one_philo.c utils2.c threads.c
+SRC = philo.c utils.c ft_atoi.c ft_strcmp.c one_philo.c utils2.c utils3.c
 OBJ = $(SRC:.c=.o)
 NAME = philo
 

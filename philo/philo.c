@@ -6,18 +6,36 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/30 00:16:38 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/30 00:33:00 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	init_mutexes(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	if (pthread_mutex_init(&data->write_lock, NULL) != 0)
+		return (0);
+	if (pthread_mutex_init(&data->full_m, NULL) != 0)
+		return (0);
+	while (i < data->n_filo)
+	{
+		if (pthread_mutex_init(&data->philos[i].m_e_m, NULL) != 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	create_threads(t_data *data)
 {
 	int	i;
 
 	i = -1;
-	while (i++ < data->n_filo)
+	while (++i < data->n_filo)
 	{
 		data->philos[i].id = i + 1;
 		data->philos[i].data = data;
@@ -32,11 +50,26 @@ int	create_threads(t_data *data)
 	while (1)
 	{
 		i = -1;
-		while (i++ < data->n_filo)
+		while (++i < data->n_filo)
 		{
 			if (!alive(&data->philos[i]) || philo_full(&data->philos[i]))
 				return (1);
 		}
+	}
+	return (1);
+}
+
+int	init_forks(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->n_forks)
+	{
+		data->forks[i].id = i;
+		if (pthread_mutex_init(&data->forks[i].fork, NULL) != 0)
+			return (0);
+		i++;
 	}
 	return (1);
 }
@@ -67,6 +100,8 @@ int	main(int argc, char **argv)
 	{
 		if (!one_philo(&data))
 			return (printf("Error\n"), 1);
+		else
+			return (0);
 	}
 	else
 	{

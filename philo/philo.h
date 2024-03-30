@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/29 23:53:53 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/30 00:27:22 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,8 @@ void	eating(t_philo *philo);
 int		parse(int argc, char **argv, t_data *data);
 int		one_philo(t_data *data);
 void	destroy_mutexes(t_data *data);
-int		init_mutexes(t_data *data);
 void	assign_forks(t_data *data);
 int		alive(t_philo *philo);
 int		philo_full(t_philo *philo);
-int		init_forks(t_data *data);
 
 #endif
