@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/29 23:56:36 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/30 00:16:38 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,15 @@ int	main(int argc, char **argv)
 	if (!parse(argc, argv, &data))
 		return (printf("Some arguments arn't valide!\n"), 1);
 	if (data.n_filo == 1)
+	{
 		if (!one_philo(&data))
 			return (printf("Error\n"), 1);
+	}
 	else
+	{
 		if ((!multiple_philos(&data)))
 			return (printf("Error!\n"), 1);
+	}
 	destroy_mutexes(&data);
 	return (0);
 }
