@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/30 00:27:22 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/31 16:22:24 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # include <pthread.h>
 # include <sys/time.h>
 # include <unistd.h>
-
-# include <libc.h>
 
 typedef struct s_philo	t_philo;
 typedef struct s_data	t_data;
