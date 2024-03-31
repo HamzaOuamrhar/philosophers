@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 02:06:02 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/30 00:20:56 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/03/31 15:31:33 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	*one_philo_handler(void *p)
 
 	data = (t_data *)p;
 	start = get_time();
-	printf("[%ld] 1 has taken a fork\n", get_time() - start);
+	printf("%ld 1 has taken a fork\n", get_time() - start);
 	while (1)
 	{
 		if (get_time() - start > data->t_die)
 		{
-			printf("[%ld] 1 died\n", get_time() - start);
+			printf("%ld 1 died\n", get_time() - start);
 			break ;
 		}
 	}
