@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:20 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/31 01:01:34 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/02 22:52:33 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	write_logs(char *s, t_philo *philo)
 
 	timestamp = get_time() - philo->data->start;
 	pthread_mutex_lock(&philo->data->write_lock);
-	printf("%ld %d %s", timestamp, philo->id, s);
+	if (philo->data->still)
+		printf("%ld %d %s", timestamp, philo->id, s);
 	pthread_mutex_unlock(&philo->data->write_lock);
 }

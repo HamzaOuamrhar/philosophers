@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 00:25:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/30 00:26:06 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/02 22:52:18 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	alive(t_philo *philo)
 	pthread_mutex_lock(&philo->m_e_m);
 	if (get_time() - philo->last_meal_time > philo->data->t_die)
 	{
+		philo->data->still = 0;
 		pthread_mutex_lock(&philo->data->write_lock);
 		printf("%ld %d died\n", get_time() - philo->data->start, philo->id);
 		pthread_mutex_unlock(&philo->m_e_m);
@@ -57,6 +58,7 @@ int	philo_full(t_philo *philo)
 		pthread_mutex_unlock(&philo->m_e_m);
 		return (0);
 	}
+	philo->data->still = 0;
 	pthread_mutex_unlock(&philo->data->full_m);
 	pthread_mutex_unlock(&philo->m_e_m);
 	pthread_mutex_lock(&philo->data->write_lock);

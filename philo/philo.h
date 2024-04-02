@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/31 16:22:24 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/02 22:51:21 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ struct s_data
 	int				n_must_eat;
 	long			start;
 	int				all_full;
+	int				still;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	full_m;
 };

@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/31 15:25:45 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/02 22:51:14 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	multiple_philos(t_data *data)
 {
 	data->start = get_time();
 	data->all_full = 0;
+	data->still = 1;
 	if (!init_mutexes(data))
 		return (0);
 	if (!init_forks(data))
