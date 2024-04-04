@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/04 11:05:31 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/04 12:09:52 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,31 @@ int	multiple_philos(t_data *data)
 	return (1);
 }
 
+int	init_philos(t_data *data)
+{
+	int		i;
+	char	*str;
+	char	*nbr;
+
+	i = -1;
+	while (++i < data->n_filo)
+	{
+		data->philos[i].id = i + 1;
+		data->philos[i].data = data;
+		data->philos[i].last_meal_time = get_time();
+		data->philos[i].meals_eaten = 0;
+		nbr = ft_itoa(data->philos[i].id);
+		str = ft_strjoin("/sem", nbr);
+		sem_unlink(str);
+		data->philos[i].edit_sem = sem_open(str, O_CREAT, 0777, 1);
+		if (data->philos[i].edit_sem == SEM_FAILED)
+			return (free(nbr), free(str), 0);
+		free(nbr);
+		free(str);
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -26,6 +51,8 @@ int	main(int argc, char **argv)
 		return (printf("Number of arguments not valide!\n"), 1);
 	if (!parse(argc, argv, &data))
 		return (printf("Some arguments arn't valide!\n"), 1);
+	if (!init_philos(&data))
+		return (printf("Error initializing philos\n"), 1);
 	if (data.n_filo == 1)
 	{
 		if (!one_philo(&data))

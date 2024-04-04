@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/04 11:29:49 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/04 12:03:51 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <sys/time.h>
 # include <unistd.h>
 # include <semaphore.h>
+# include <stdlib.h>
 
 typedef struct s_philo	t_philo;
 typedef struct s_data	t_data;
@@ -30,7 +31,7 @@ struct s_philo
 	t_data			*data;
 	int				meals_eaten;
 	long			last_meal_time;
-	sem_t			edit_sem;
+	sem_t			*edit_sem;
 };
 
 struct s_data
@@ -43,9 +44,9 @@ struct s_data
 	int				t_sleep;
 	int				n_must_eat;
 	long			start;
-	sem_t			die_sem;
-	sem_t			write_sem;
-	sem_t			full_sem;
+	sem_t			*die_sem;
+	sem_t			*write_sem;
+	sem_t			*full_sem;
 };
 
 int		ft_atoi(const char *str);
@@ -59,5 +60,7 @@ void	sleeping(t_philo *philo);
 void	eating(t_philo *philo);
 int		parse(int argc, char **argv, t_data *data);
 int		one_philo(t_data *data);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_itoa(int n);
 
 #endif
