@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:20 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/04 11:01:41 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/04 22:03:45 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,7 @@ void	write_logs(char *s, t_philo *philo)
 	long	timestamp;
 
 	timestamp = get_time() - philo->data->start;
+	sem_wait(philo->data->write_sem);
 	printf("%ld %d %s", timestamp, philo->id, s);
+	sem_post(philo->data->write_sem);
 }

@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/04 12:09:52 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/04 22:21:21 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,19 @@
 
 int	multiple_philos(t_data *data)
 {
-	(void)data;
-	return (1);
+	int	i;
+
+	i = -1;
+	while (++i < data->n_filo)
+	{
+		data->philos[i].philo = fork();
+		if (data->philos[i].philo == -1)
+			return (0);
+		if (data->philos[i].philo == 0)
+			simulation(&data->philos[i]);
+	}
+	sem_wait(data->end_sem);
+	exit(0);
 }
 
 int	init_philos(t_data *data)
@@ -43,6 +54,20 @@ int	init_philos(t_data *data)
 	return (1);
 }
 
+int	init_data(t_data *data)
+{
+	sem_unlink("/write_sem");
+	sem_unlink("/end_sem");
+	sem_unlink("/forks");
+	data->end_sem = sem_open("/end_sem", O_CREAT, 0777, 0);
+	data->write_sem = sem_open("/write_sem", O_CREAT, 0777, 1);
+	data->forks = sem_open("/forks", O_CREAT, 0777, data->n_filo);
+	if (data->end_sem == SEM_FAILED || data->write_sem == SEM_FAILED || data->forks == SEM_FAILED)
+		return (0);
+	data->start = get_time();
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -53,6 +78,8 @@ int	main(int argc, char **argv)
 		return (printf("Some arguments arn't valide!\n"), 1);
 	if (!init_philos(&data))
 		return (printf("Error initializing philos\n"), 1);
+	if (!init_data(&data))
+		return (printf("Error initializing data\n"), 1);
 	if (data.n_filo == 1)
 	{
 		if (!one_philo(&data))

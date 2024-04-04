@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/04 12:03:51 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/04 22:21:02 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ struct s_data
 	int				t_sleep;
 	int				n_must_eat;
 	long			start;
-	sem_t			*die_sem;
 	sem_t			*write_sem;
-	sem_t			*full_sem;
+	sem_t			*end_sem;
+	sem_t			*forks;
 };
 
 int		ft_atoi(const char *str);
@@ -62,5 +62,6 @@ int		parse(int argc, char **argv, t_data *data);
 int		one_philo(t_data *data);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_itoa(int n);
+void	simulation(t_philo *philo);
 
 #endif
