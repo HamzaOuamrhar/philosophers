@@ -6,14 +6,38 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:06:02 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/05 00:11:35 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/05 01:19:03 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
+void	*check_for_die(void *p)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)p;
+	while (1)
+	{
+		sem_wait(philo->edit_sem);
+		if (get_time() - philo->last_meal_time > philo->data->t_die)
+		{
+			write_logs("died\n", philo, 1);
+			sem_post(philo->edit_sem);
+			sem_post(philo->data->end_sem);
+			return (NULL);
+		}
+		sem_post(philo->edit_sem);
+	}
+	return (NULL);
+}
+
 int	simulation(t_philo *philo)
 {
+	if (pthread_create(&philo->checker, NULL, &check_for_die, philo) != 0)
+		return (0);
+	if (pthread_detach(philo->checker) != 0)
+		return (0);
 	while (1)
 	{
 		eating(philo);
@@ -26,14 +50,14 @@ int	simulation(t_philo *philo)
 void	eating(t_philo *philo)
 {
 	sem_wait(philo->data->forks);
-	write_logs("has taken a fork\n", philo);
+	write_logs("has taken a fork\n", philo, 0);
 	sem_wait(philo->data->forks);
-	write_logs("has taken a fork\n", philo);
+	write_logs("has taken a fork\n", philo, 0);
 	sem_wait(philo->edit_sem);
 	philo->last_meal_time = get_time();
 	philo->meals_eaten += 1;
 	sem_post(philo->edit_sem);
-	write_logs("is eating\n", philo);
+	write_logs("is eating\n", philo, 0);
 	precise_usleep(philo->data->t_eat);
 	sem_post(philo->data->forks);
 	sem_post(philo->data->forks);
@@ -41,11 +65,11 @@ void	eating(t_philo *philo)
 
 void	sleeping(t_philo *philo)
 {
-	write_logs("is sleeping\n", philo);
+	write_logs("is sleeping\n", philo, 0);
 	precise_usleep(philo->data->t_sleep);
 }
 
 void	thinking(t_philo *philo)
 {
-	write_logs("is thinking\n", philo);
+	write_logs("is thinking\n", philo,0);
 }

@@ -6,11 +6,24 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/04 23:40:03 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/05 01:15:10 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
+
+void	kill_all(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->n_filo)
+	{
+		if (data->philos[i].philo != 0)
+			kill(data->philos[i].philo, SIGINT);
+		i++;
+	}
+}
 
 int	multiple_philos(t_data *data)
 {
@@ -27,6 +40,7 @@ int	multiple_philos(t_data *data)
 				return (0);
 	}
 	sem_wait(data->end_sem);
+	kill_all(data);
 	exit(0);
 }
 
