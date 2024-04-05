@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/03/31 15:25:45 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/05 22:01:26 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int	main(int argc, char **argv)
 		if ((!multiple_philos(&data)))
 			return (printf("Error!\n"), 1);
 	}
+	precise_usleep(400);
 	destroy_mutexes(&data);
 	return (0);
 }
