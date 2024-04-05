@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/04 22:21:02 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/04 23:40:12 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <semaphore.h>
 # include <stdlib.h>
+# include <signal.h>
 
 typedef struct s_philo	t_philo;
 typedef struct s_data	t_data;
@@ -62,6 +63,6 @@ int		parse(int argc, char **argv, t_data *data);
 int		one_philo(t_data *data);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_itoa(int n);
-void	simulation(t_philo *philo);
+int		simulation(t_philo *philo);
 
 #endif

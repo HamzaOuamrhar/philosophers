@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 02:06:02 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/04 11:05:47 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/04 23:30:22 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 
 int		one_philo(t_data *data)
 {
-	(void)data;
+	data->philos[0].philo = fork();
+	if (data->philos[0].philo == -1)
+		return (0);
+	if (data->philos[0].philo == 0)
+	{
+		printf("%ld %d has taken a fork\n", get_time() - data->start, data->philos[0].id);
+		precise_usleep(data->t_die);
+		printf("%ld %d died\n", get_time() - data->start, data->philos[0].id);
+	}
+	else
+		wait(NULL);
 	return (1);
 }

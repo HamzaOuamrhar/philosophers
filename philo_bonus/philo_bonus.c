@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/04 22:21:21 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/04 23:40:03 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	multiple_philos(t_data *data)
 		if (data->philos[i].philo == -1)
 			return (0);
 		if (data->philos[i].philo == 0)
-			simulation(&data->philos[i]);
+			if (!simulation(&data->philos[i]))
+				return (0);
 	}
 	sem_wait(data->end_sem);
 	exit(0);
