@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:20 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/05 01:18:35 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/05 15:11:50 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	write_logs(char *s, t_philo *philo, int flag)
 	if (flag == 1)
 	{
 		sem_post(philo->data->end_sem);
-		sem_post(philo->data->write_sem);
 		return ;
 	}
 	sem_post(philo->data->write_sem);

@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:06:02 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/05 02:33:55 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/05 15:11:25 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	*check_for_die(void *p)
 		{
 			write_logs("died\n", philo, 1);
 			sem_post(philo->edit_sem);
-			sem_post(philo->data->end_sem);
 			return (NULL);
 		}
 		sem_post(philo->edit_sem);
