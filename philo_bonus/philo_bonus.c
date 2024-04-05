@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/05 16:15:02 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:28:33 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	multiple_philos(t_data *data)
 		return (0);
 	sem_wait(data->end_sem);
 	kill_all(data);
+	close_sem(data);
 	exit(0);
 }
 
@@ -108,14 +109,14 @@ int	main(int argc, char **argv)
 	if (data.n_filo == 1)
 	{
 		if (!one_philo(&data))
-			return (printf("Error\n"), 1);
+			return (close_sem(&data), printf("Error\n"), 1);
 		else
-			return (0);
+			return (close_sem(&data), 0);
 	}
 	else
 	{
 		if ((!multiple_philos(&data)))
-			return (printf("Error!\n"), 1);
+			return (close_sem(&data), printf("Error!\n"), 1);
 	}
 	return (0);
 }
