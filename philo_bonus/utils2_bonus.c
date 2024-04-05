@@ -6,13 +6,13 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:06:02 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/04 22:20:52 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/05 00:11:35 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	simulation(t_philo *philo)
+int	simulation(t_philo *philo)
 {
 	while (1)
 	{
@@ -20,6 +20,7 @@ void	simulation(t_philo *philo)
 		sleeping(philo);
 		thinking(philo);
 	}
+	return (1);
 }
 
 void	eating(t_philo *philo)
