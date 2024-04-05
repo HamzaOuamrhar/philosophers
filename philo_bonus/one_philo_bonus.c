@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 02:06:02 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/05 16:13:48 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:22:17 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ int	one_philo(t_data *data)
 		printf("%ld %d died\n", get_time() - data->start, data->philos[0].id);
 	}
 	else
-		wait(NULL);
+		waitpid(0, NULL, 0);
 	return (1);
 }
