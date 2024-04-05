@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:06:02 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/05 15:11:25 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:14:45 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,5 @@ void	sleeping(t_philo *philo)
 
 void	thinking(t_philo *philo)
 {
-	write_logs("is thinking\n", philo,0);
+	write_logs("is thinking\n", philo, 0);
 }

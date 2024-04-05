@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/05 02:29:24 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:15:28 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ int		one_philo(t_data *data);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_itoa(int n);
 int		simulation(t_philo *philo);
+void	kill_all(t_data *data);
 
 #endif

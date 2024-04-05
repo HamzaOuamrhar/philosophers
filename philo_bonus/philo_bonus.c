@@ -6,28 +6,15 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/05 02:32:43 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:15:02 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	kill_all(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->n_filo)
-	{
-		if (data->philos[i].philo != 0)
-			kill(data->philos[i].philo, SIGINT);
-		i++;
-	}
-}
-
 void	*full_check(void *p)
 {
-	t_data *data;
+	t_data	*data;
 	int		i;
 
 	i = 0;
@@ -99,7 +86,8 @@ int	init_data(t_data *data)
 	data->write_sem = sem_open("/write_sem", O_CREAT, 0777, 1);
 	data->full_sem = sem_open("/full_sem", O_CREAT, 0777, 1);
 	data->forks = sem_open("/forks", O_CREAT, 0777, data->n_filo);
-	if (data->end_sem == SEM_FAILED || data->write_sem == SEM_FAILED || data->forks == SEM_FAILED || data->full_sem == SEM_FAILED)
+	if (data->end_sem == SEM_FAILED || data->write_sem == SEM_FAILED
+		|| data->forks == SEM_FAILED || data->full_sem == SEM_FAILED)
 		return (0);
 	data->start = get_time();
 	return (1);
