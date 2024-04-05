@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:13:07 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/05 01:15:10 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/05 02:32:43 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,22 @@ void	kill_all(t_data *data)
 	}
 }
 
+void	*full_check(void *p)
+{
+	t_data *data;
+	int		i;
+
+	i = 0;
+	data = (t_data *)p;
+	while (i <= data->n_filo)
+	{
+		sem_wait(data->full_sem);
+		i++;
+	}
+	sem_post(data->end_sem);
+	return (NULL);
+}
+
 int	multiple_philos(t_data *data)
 {
 	int	i;
@@ -39,6 +55,10 @@ int	multiple_philos(t_data *data)
 			if (!simulation(&data->philos[i]))
 				return (0);
 	}
+	if (pthread_create(&data->full_checker, NULL, &full_check, data) != 0)
+		return (0);
+	if (pthread_detach(data->full_checker) != 0)
+		return (0);
 	sem_wait(data->end_sem);
 	kill_all(data);
 	exit(0);
@@ -74,10 +94,12 @@ int	init_data(t_data *data)
 	sem_unlink("/write_sem");
 	sem_unlink("/end_sem");
 	sem_unlink("/forks");
+	sem_unlink("/full_sem");
 	data->end_sem = sem_open("/end_sem", O_CREAT, 0777, 0);
 	data->write_sem = sem_open("/write_sem", O_CREAT, 0777, 1);
+	data->full_sem = sem_open("/full_sem", O_CREAT, 0777, 1);
 	data->forks = sem_open("/forks", O_CREAT, 0777, data->n_filo);
-	if (data->end_sem == SEM_FAILED || data->write_sem == SEM_FAILED || data->forks == SEM_FAILED)
+	if (data->end_sem == SEM_FAILED || data->write_sem == SEM_FAILED || data->forks == SEM_FAILED || data->full_sem == SEM_FAILED)
 		return (0);
 	data->start = get_time();
 	return (1);

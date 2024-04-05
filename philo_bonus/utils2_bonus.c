@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:06:02 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/05 01:19:03 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/05 02:33:55 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,13 @@ void	eating(t_philo *philo)
 	write_logs("has taken a fork\n", philo, 0);
 	sem_wait(philo->data->forks);
 	write_logs("has taken a fork\n", philo, 0);
+	write_logs("is eating\n", philo, 0);
 	sem_wait(philo->edit_sem);
 	philo->last_meal_time = get_time();
 	philo->meals_eaten += 1;
+	if (philo->meals_eaten == philo->data->n_must_eat)
+		sem_post(philo->data->full_sem);
 	sem_post(philo->edit_sem);
-	write_logs("is eating\n", philo, 0);
 	precise_usleep(philo->data->t_eat);
 	sem_post(philo->data->forks);
 	sem_post(philo->data->forks);

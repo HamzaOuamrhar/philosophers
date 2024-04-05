@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:14:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/05 01:16:36 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/05 02:29:24 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ struct s_philo
 struct s_data
 {
 	t_philo			philos[200];
+	pthread_t		full_checker;
 	int				n_filo;
 	int				n_forks;
 	int				t_die;
@@ -48,6 +49,7 @@ struct s_data
 	sem_t			*write_sem;
 	sem_t			*end_sem;
 	sem_t			*forks;
+	sem_t			*full_sem;
 };
 
 int		ft_atoi(const char *str);
