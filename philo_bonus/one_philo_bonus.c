@@ -6,13 +6,13 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 02:06:02 by houamrha          #+#    #+#             */
-/*   Updated: 2024/04/04 23:30:22 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/04/05 15:15:57 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-int		one_philo(t_data *data)
+int	one_philo(t_data *data)
 {
 	data->philos[0].philo = fork();
 	if (data->philos[0].philo == -1)
